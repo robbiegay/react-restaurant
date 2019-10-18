@@ -15,7 +15,7 @@ class Header extends React.Component {
 
     randomHours() {
         let openAt = 6 + Math.floor(Math.random() * 5);
-        let closeAt = Math.floor(Math.random() * 7);
+        let closeAt = Math.floor(Math.random() * 6);
         return <h2>Hours: {openAt}am – {openAt - closeAt}pm</h2>
     }
 
