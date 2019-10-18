@@ -3,8 +3,8 @@ import React from 'react';
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.restFirstName = ["Andy's", "Amazing", "Awesome", "Alright"];
-        this.restSecondName = ["Igloo", "Inventions", "Iterations", "Ideas"];
+        this.restFirstName = ["Andy's", "Hometown", "Local", "Pretty Decent"]; // ["Andy's", "Amazing", "Awesome", "Alright"]
+        this.restSecondName = ["Yummy Stuff", "Inventions", "Food", "Plates"]; // ["Igloo", "Inventions", "Iterations", "Ideas"]
     }
 
     randomName() {
@@ -14,7 +14,8 @@ class Header extends React.Component {
     }
 
     randomHours() {
-        let openAt = 6 + Math.floor(Math.random() * 5);
+        const earliestTime = 6;
+        let openAt = earliestTime + Math.floor(Math.random() * 5);
         let closeAt = Math.floor(Math.random() * 6);
         return <h2>Hours: {openAt}am – {openAt - closeAt}pm</h2>
     }

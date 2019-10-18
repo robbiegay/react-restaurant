@@ -1,13 +1,17 @@
 import React from 'react';
 
-function getMenuItems(x) {
-    fetch('https://entree-f18.herokuapp.com/v1/menu/12').then(function (response) {
-        response.json().then(function (data) {
-            console.log(data.menu_items[x].description);
-            return data.menu_items[x].description;
-        });
-    });
-}
+
+// Model
+// function getMenuItems(x) {
+//     fetch('https://entree-f18.herokuapp.com/v1/menu/12').then(function (response) {
+//         response.json().then(function (data) {
+//             console.log(data.menu_items[x].description);
+//             // return data.menu_items[x].description;
+//             // SET STATE
+//             this.setState({item0:data.menu_items});
+//         });
+//     });
+// }
 
 class Menu extends React.Component {
     constructor(props) {
@@ -15,12 +19,20 @@ class Menu extends React.Component {
         this.state = {item0: null};
     }
 
+    // Controller
     componentDidMount() {
-        this.setState({item0: getMenuItems(0)});
+        // this.setState({item0: getMenuItems(0)});
+        getMenuItems(0);
     }
 
     componentWillUnmount() {
 
+    }
+
+    setPrice(x) {
+        let priceRange = [5, 10, 15]
+        let y = Math.random() * priceRange[x];
+        return `$${Math.ceil(Math.random() * y)}`;
     }
 
     render() {
@@ -45,10 +57,10 @@ class Menu extends React.Component {
                 </ul>
                 <div className="tab-content" id="pills-tabContent">
                     <div className="tab-pane fade show active" id="pills-apps" role="tabpanel" aria-labelledby="apps-tab">{this.state.item0}</div>
-                    <div className="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="lunch-tab">{getMenuItems(1)}</div>
-                    <div className="tab-pane fade" id="pills-snacks" role="tabpanel" aria-labelledby="snacks-tab">{getMenuItems(2)}</div>
-                    <div className="tab-pane fade" id="pills-dinner" role="tabpanel" aria-labelledby="dinner-tab">{getMenuItems(3)}</div>
-                    <div className="tab-pane fade" id="pills-secondDinner" role="tabpanel" aria-labelledby="secondDinner-tab">{getMenuItems(4)}</div>
+                    <div className="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="lunch-tab">Lunch iteams {this.setPrice(1)}</div>
+                    <div className="tab-pane fade" id="pills-snacks" role="tabpanel" aria-labelledby="snacks-tab">Snacks — lots of them</div>
+                    <div className="tab-pane fade" id="pills-dinner" role="tabpanel" aria-labelledby="dinner-tab">Dinner. Yum.</div>
+                    <div className="tab-pane fade" id="pills-secondDinner" role="tabpanel" aria-labelledby="secondDinner-tab">Still hungry?</div>
                 </div>
             </React.Fragment>
         );
