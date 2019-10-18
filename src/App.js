@@ -1,10 +1,10 @@
 import React from 'react';
-import logo from './logo.svg';
+import Layout from './Layout.js';
 import './App.css';
 
 function App() {
   return (
-    <p>Restaurant Coming Soon!</p>
+    <Layout />
   );
 }
 
