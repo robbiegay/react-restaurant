@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from './Card';
 
 class Menu extends React.Component {
     constructor(props) {
@@ -32,6 +33,18 @@ class Menu extends React.Component {
         return `$${Math.ceil(Math.random() * 5) + priceRange[x]}`;
     }
 
+    getText(type, num) {
+        if (this.state.menuItems !== 'Generic Food') {
+            let words = this.state.menuItems[num].description.split(' ');
+            if (type === 'title') {
+                return words[0] + ' ' + words[1][0].toUpperCase() + words[1].slice(1);
+            }
+            let startingIdx = words[0].length + 1;
+            let text = this.state.menuItems[num].description.slice(startingIdx);
+            return text[0].toUpperCase() + text.slice(1);
+        }
+    }
+
     render() {
         return (
             <React.Fragment >
@@ -53,8 +66,8 @@ class Menu extends React.Component {
                     </li>
                 </ul>
                 <div className="tab-content" id="pills-tabContent">
-                    <div className="tab-pane fade show active" id="pills-apps" role="tabpanel" aria-labelledby="apps-tab">{this.state.menuItems[0].description} {this.setPrice(0)}</div>
-                    <div className="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="lunch-tab">Lunch items {this.setPrice(0)}</div>
+                    <div className="tab-pane fade show active" id="pills-apps" role="tabpanel" aria-labelledby="apps-tab"><Card mealTitle={this.getText('title', 0)} mealDescription={this.getText('des', 0)} mealPrice={this.setPrice(0)} /></div>
+                    <div className="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="lunch-tab">{this.state.menuItems[0].description} {this.setPrice(0)}</div>
                     <div className="tab-pane fade" id="pills-snacks" role="tabpanel" aria-labelledby="snacks-tab">Snacks — lots of them {this.setPrice(1)}</div>
                     <div className="tab-pane fade" id="pills-dinner" role="tabpanel" aria-labelledby="dinner-tab">Dinner. Yum. {this.setPrice(2)}</div>
                     <div className="tab-pane fade" id="pills-secondDinner" role="tabpanel" aria-labelledby="secondDinner-tab">Still hungry? {this.setPrice(1)}</div>
