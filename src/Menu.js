@@ -66,11 +66,28 @@ class Menu extends React.Component {
                     </li>
                 </ul>
                 <div className="tab-content" id="pills-tabContent">
-                    <div className="tab-pane fade show active" id="pills-apps" role="tabpanel" aria-labelledby="apps-tab"><Card mealTitle={this.getText('title', 0)} mealDescription={this.getText('des', 0)} mealPrice={this.setPrice(0)} /></div>
-                    <div className="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="lunch-tab">{this.state.menuItems[0].description} {this.setPrice(0)}</div>
-                    <div className="tab-pane fade" id="pills-snacks" role="tabpanel" aria-labelledby="snacks-tab">Snacks — lots of them {this.setPrice(1)}</div>
-                    <div className="tab-pane fade" id="pills-dinner" role="tabpanel" aria-labelledby="dinner-tab">Dinner. Yum. {this.setPrice(2)}</div>
-                    <div className="tab-pane fade" id="pills-secondDinner" role="tabpanel" aria-labelledby="secondDinner-tab">Still hungry? {this.setPrice(1)}</div>
+                    <div className="tab-pane fade show active" id="pills-apps" role="tabpanel" aria-labelledby="apps-tab">
+                        <Card mealTitle={this.getText('title', 0)} mealDescription={this.getText('des', 0)} mealPrice={this.setPrice(0)} />
+                        <Card mealTitle={this.getText('title', 1)} mealDescription={this.getText('des', 1)} mealPrice={this.setPrice(0)} />
+                    </div>
+                    <div className="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="lunch-tab">
+                        <Card mealTitle={this.getText('title', 2)} mealDescription={this.getText('des', 2)} mealPrice={this.setPrice(1)} />
+                        <Card mealTitle={this.getText('title', 3)} mealDescription={this.getText('des', 3)} mealPrice={this.setPrice(1)} />
+                        <Card mealTitle={this.getText('title', 4)} mealDescription={this.getText('des', 4)} mealPrice={this.setPrice(1)} />
+                    </div>
+                    <div className="tab-pane fade" id="pills-snacks" role="tabpanel" aria-labelledby="snacks-tab">
+                        <Card mealTitle={this.getText('title', 5)} mealDescription={this.getText('des', 5)} mealPrice={this.setPrice(0)} />
+                        <Card mealTitle={this.getText('title', 6)} mealDescription={this.getText('des', 6)} mealPrice={this.setPrice(0)} />
+                    </div>
+                    <div className="tab-pane fade" id="pills-dinner" role="tabpanel" aria-labelledby="dinner-tab">
+                        <Card mealTitle={this.getText('title', 7)} mealDescription={this.getText('des', 7)} mealPrice={this.setPrice(2)} />
+                        <Card mealTitle={this.getText('title', 8)} mealDescription={this.getText('des', 8)} mealPrice={this.setPrice(1)} />
+                        <Card mealTitle={this.getText('title', 9)} mealDescription={this.getText('des', 9)} mealPrice={this.setPrice(2)} />
+                    </div>
+                    <div className="tab-pane fade" id="pills-secondDinner" role="tabpanel" aria-labelledby="secondDinner-tab">
+                        <Card mealTitle={this.getText('title', 10)} mealDescription={this.getText('des', 10)} mealPrice={this.setPrice(1)} />
+                        <Card mealTitle={this.getText('title', 11)} mealDescription={this.getText('des', 11)} mealPrice={this.setPrice(2)} />
+                    </div>
                     {console.log(this.state)}
                 </div>
             </React.Fragment >
