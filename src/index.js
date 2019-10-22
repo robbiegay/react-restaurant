@@ -10,8 +10,12 @@ import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
-// ALLOWS YOU TO USE THE DELETE KEY TO QUICKLY CLEAR LOCAL STORAGE
-// VIEW CURRENT LOCAL STORAGE WITH '=' KEY
+/*
+TESTING KEY COMMANDS
+DELETE --> Quickly clear the Local Storage
+'='    --> Console.log the Local Storage
+
+*/
 document.addEventListener('keydown', function (e) {
     if (e.keyCode === 8) {
         console.log('LOCAL STORAGE WAS CLEARED!');

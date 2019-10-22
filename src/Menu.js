@@ -4,30 +4,40 @@ import Card from './Card';
 class Menu extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { menuItems: 'Generic Food' };
+        this.state = {
+            menuItems: 'Generic Food',
+        };
     }
 
     getMenuItems() {
+        let menuArr = [];
         // 'this' can't be accessed in fetch, so I pass it in as a variable
         const that = this;
-        fetch('https://entree-f18.herokuapp.com/v1/menu/12').then(function (response) {
-            response.json().then(function (data) {
-                that.setState({ menuItems: data.menu_items });
+        for (let i = 0; i < 2; i++) {
+            fetch('https://entree-f18.herokuapp.com/v1/menu/12').then(function (response) {
+                response.json().then(function (data) {
+                    for (let i in data.menu_items) {
+                        menuArr.push(data.menu_items[i]);
+                    }
+                    if (menuArr.length === 24) {
+                        localStorage.setItem('menu', JSON.stringify(menuArr));
+                        that.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+                    }
+                });
             });
-        });
-
+        }
     }
 
     // Controller
     componentDidMount() {
-        this.getMenuItems();
+        if (!window.localStorage.length) {
+            this.getMenuItems();
+        } else {
+            this.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+        }
     }
 
-    componentWillUnmount() {
-
-    }
-
-    // Lets me generate random prices, in a low, medium, high range
+    // Lets me generate random prices, in a low, medium, and high price range
     setPrice(x) {
         const priceRange = [5, 10, 15]
         return `$${Math.ceil(Math.random() * 5) + priceRange[x]}`;
@@ -45,90 +55,75 @@ class Menu extends React.Component {
         }
     }
 
+    genItem(num, price) {
+        return <Card mealTitle={this.getText('title', num)} mealDescription={this.getText('des', num)} mealPrice={this.setPrice(price)} />
+    }
+
     render() {
-        return (
-            <React.Fragment >
-                <ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
-                    <li className="nav-item">
-                        <a className="nav-link active" id="apps-tab" data-toggle="pill" href="#pills-apps" role="tab" aria-controls="pills-apps" aria-selected="true">Appetizers</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" id="lunch-tab" data-toggle="pill" href="#pills-lunch" role="tab" aria-controls="pills-lunch" aria-selected="false">Lunch</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" id="snacks-tab" data-toggle="pill" href="#pills-snacks" role="tab" aria-controls="pills-snacks" aria-selected="false">Snacks</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" id="dinner-tab" data-toggle="pill" href="#pills-dinner" role="tab" aria-controls="pills-dinner" aria-selected="false">Dinner</a>
-                    </li>
-                    <li className="nav-item">
-                        <a className="nav-link" id="secondDinner-tab" data-toggle="pill" href="#pills-secondDinner" role="tab" aria-controls="pills-secondDinner" aria-selected="false">Second Dinner</a>
-                    </li>
-                </ul>
-                <div className="tab-content" id="pills-tabContent">
-                    <div className="tab-pane fade show active" id="pills-apps" role="tabpanel" aria-labelledby="apps-tab">
-                        <Card mealTitle={this.getText('title', 0)} mealDescription={this.getText('des', 0)} mealPrice={this.setPrice(0)} />
-                        <Card mealTitle={this.getText('title', 1)} mealDescription={this.getText('des', 1)} mealPrice={this.setPrice(0)} />
+        if (!window.localStorage.length) {
+            return (
+                <div>loading...</div>
+            )
+        } else {
+            return (
+                <React.Fragment >
+                    <ul className="nav nav-pills nav-justified mb-3" id="pills-tab" role="tablist">
+                        <li className="nav-item">
+                            <a className="nav-link active" id="apps-tab" data-toggle="pill" href="#pills-apps" role="tab" aria-controls="pills-apps" aria-selected="true">Appetizers</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" id="lunch-tab" data-toggle="pill" href="#pills-lunch" role="tab" aria-controls="pills-lunch" aria-selected="false">Lunch</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" id="snacks-tab" data-toggle="pill" href="#pills-snacks" role="tab" aria-controls="pills-snacks" aria-selected="false">Snacks</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" id="dinner-tab" data-toggle="pill" href="#pills-dinner" role="tab" aria-controls="pills-dinner" aria-selected="false">Dinner</a>
+                        </li>
+                        <li className="nav-item">
+                            <a className="nav-link" id="secondDinner-tab" data-toggle="pill" href="#pills-secondDinner" role="tab" aria-controls="pills-secondDinner" aria-selected="false">Second Dinner</a>
+                        </li>
+                    </ul>
+                    <div className="tab-content" id="pills-tabContent">
+                        <div className="tab-pane fade show active" id="pills-apps" role="tabpanel" aria-labelledby="apps-tab">
+                            {this.genItem(0, 0)}
+                            {this.genItem(1, 0)}
+                            {this.genItem(2, 0)}
+                            {this.genItem(3, 1)}
+                            {this.genItem(4, 0)}
+                        </div>
+                        <div className="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="lunch-tab">
+                            {this.genItem(5, 1)}
+                            {this.genItem(6, 1)}
+                            {this.genItem(7, 2)}
+                            {this.genItem(8, 1)}
+                            {this.genItem(9, 2)}
+                            {this.genItem(10, 1)}
+                        </div>
+                        <div className="tab-pane fade" id="pills-snacks" role="tabpanel" aria-labelledby="snacks-tab">
+                            {this.genItem(11, 0)}
+                            {this.genItem(12, 0)}
+                            {this.genItem(13, 1)}
+                            {this.genItem(14, 0)}
+                            {this.genItem(15, 0)}
+                        </div>
+                        <div className="tab-pane fade" id="pills-dinner" role="tabpanel" aria-labelledby="dinner-tab">
+                            {this.genItem(16, 2)}
+                            {this.genItem(17, 1)}
+                            {this.genItem(18, 2)}
+                            {this.genItem(19, 2)}
+                        </div>
+                        <div className="tab-pane fade" id="pills-secondDinner" role="tabpanel" aria-labelledby="secondDinner-tab">
+                            {this.genItem(20, 1)}
+                            {this.genItem(21, 2)}
+                            {this.genItem(22, 2)}
+                            {this.genItem(23, 2)}
+                        </div>
                     </div>
-                    <div className="tab-pane fade" id="pills-lunch" role="tabpanel" aria-labelledby="lunch-tab">
-                        <Card mealTitle={this.getText('title', 2)} mealDescription={this.getText('des', 2)} mealPrice={this.setPrice(1)} />
-                        <Card mealTitle={this.getText('title', 3)} mealDescription={this.getText('des', 3)} mealPrice={this.setPrice(1)} />
-                        <Card mealTitle={this.getText('title', 4)} mealDescription={this.getText('des', 4)} mealPrice={this.setPrice(1)} />
-                    </div>
-                    <div className="tab-pane fade" id="pills-snacks" role="tabpanel" aria-labelledby="snacks-tab">
-                        <Card mealTitle={this.getText('title', 5)} mealDescription={this.getText('des', 5)} mealPrice={this.setPrice(0)} />
-                        <Card mealTitle={this.getText('title', 6)} mealDescription={this.getText('des', 6)} mealPrice={this.setPrice(0)} />
-                    </div>
-                    <div className="tab-pane fade" id="pills-dinner" role="tabpanel" aria-labelledby="dinner-tab">
-                        <Card mealTitle={this.getText('title', 7)} mealDescription={this.getText('des', 7)} mealPrice={this.setPrice(2)} />
-                        <Card mealTitle={this.getText('title', 8)} mealDescription={this.getText('des', 8)} mealPrice={this.setPrice(1)} />
-                        <Card mealTitle={this.getText('title', 9)} mealDescription={this.getText('des', 9)} mealPrice={this.setPrice(2)} />
-                    </div>
-                    <div className="tab-pane fade" id="pills-secondDinner" role="tabpanel" aria-labelledby="secondDinner-tab">
-                        <Card mealTitle={this.getText('title', 10)} mealDescription={this.getText('des', 10)} mealPrice={this.setPrice(1)} />
-                        <Card mealTitle={this.getText('title', 11)} mealDescription={this.getText('des', 11)} mealPrice={this.setPrice(2)} />
-                    </div>
-                    {console.log(this.state)}
-                </div>
-            </React.Fragment >
-        );
+                </React.Fragment >
+            );
+        }
     }
 }
 
 export default Menu;
-
-
-
-
-
-// Model
-// function getMenuItems() {
-//     fetch('https://entree-f18.herokuapp.com/v1/menu/12').then(function (response) {
-//         response.json().then(function (data) {
-//             // SET STATE
-//             // this.setState({ menuItems: data.menu_items });
-//             this.setState({ menuItems: 'Test Food' });
-//             // console.log(data.menu_items);
-//         });
-//     });
-// }
-
-// async getMenuItems() {
-//     this.setState({ menuItems: 'eruireuireuiertui' });
-//     let x = await fetch('https://entree-f18.herokuapp.com/v1/menu/12').then(function (response) {
-//         response.json().then(function (data) {
-//             console.log(data.menu_items);
-//             return data.menu_items;
-//         });
-//     });
-//     console.log(`x = ${x}`);
-//     this.setState({ menuItems: x });
-// }
-
-// fetchAPI() {
-//     fetch('https://entree-f18.herokuapp.com/v1/menu/12').then(function (response) {
-//         response.json().then(function (data) {
-//             return data.menu_items;
-//         });
-//     });
-// }
