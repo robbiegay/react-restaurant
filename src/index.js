@@ -11,7 +11,7 @@ ReactDOM.render(<App />, document.getElementById('root'));
 /*
 TESTING KEY COMMANDS
 DELETE --> Quickly clear the Local Storage
-'='    --> Console.log the Local Storage
+'='    --> Console.log() the Local Storage
 */
 document.addEventListener('keydown', function (e) {
     if (e.keyCode === 8) {
