@@ -2,6 +2,8 @@ import React from 'react';
 import Header from './Header.js';
 import Menu from './Menu.js';
 
+// Adds a Bootstrap layout to the App
+
 class Layout extends React.Component {
     render() {
         return (
