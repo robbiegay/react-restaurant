@@ -6,7 +6,6 @@ class Menu extends React.Component {
         super(props);
         this.state = { 
             menuItems: 'Generic Food',
-            // initialized: false
          };
     }
 
@@ -22,8 +21,8 @@ class Menu extends React.Component {
                         menuArr.push(data.menu_items[i]);
                     }
                     // that.setState({ menuItems: data.menu_items });
-                    localStorage.setItem('menu', JSON.stringify(menuArr));
-                    that.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+                    menuArr.length === 24 && localStorage.setItem('menu', JSON.stringify(menuArr));
+                    menuArr.length === 24 && that.setState({ menuItems: JSON.parse(window.localStorage.menu) });
                 });
             });
         }
@@ -67,7 +66,7 @@ class Menu extends React.Component {
     }
 
     render() {
-        if(window.localStorage.length < 1){ //JSON.parse(window.localStorage.menu).length
+        if(!window.localStorage.length){ //JSON.parse(window.localStorage.menu).length
             return (
                 <div>loading...</div>
             )
