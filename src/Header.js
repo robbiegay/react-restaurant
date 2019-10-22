@@ -7,12 +7,14 @@ class Header extends React.Component {
         this.restSecondName = ["Yummy Stuff", "Inventions", "Food", "Plates", "Experience", "Snacks", "Express"];
     }
 
+    // Generates a random restaurant name
     randomName() {
         let x = Math.floor(Math.random() * 5);
         let y = Math.floor(Math.random() * 7);
         return <h1 className='text-primary'>{this.restFirstName[x]} {this.restSecondName[y]}</h1>;
     }
 
+    // Generates random restaurant operating hours
     randomHours() {
         const earliestTime = 6;
         let openAt = earliestTime + Math.floor(Math.random() * 5);

@@ -1,5 +1,6 @@
 import React from 'react';
 
+// Card for each menu item
 class Card extends React.Component {
     render() {
         return (

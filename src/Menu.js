@@ -5,6 +5,7 @@ class Menu extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            // A default starting item, otherwise was getting error: Cannot read property '0' of null
             menuItems: 'Generic Food',
         };
     }
@@ -19,6 +20,9 @@ class Menu extends React.Component {
                     for (let i in data.menu_items) {
                         menuArr.push(data.menu_items[i]);
                     }
+                    // Wait until fetch has been called both times, then set local state
+                    // Otherwise, was getting an error where the first fetch was called,
+                    // then, while the second fetch was running, the menu was already starting to build
                     if (menuArr.length === 24) {
                         localStorage.setItem('menu', JSON.stringify(menuArr));
                         that.setState({ menuItems: JSON.parse(window.localStorage.menu) });
@@ -30,6 +34,7 @@ class Menu extends React.Component {
 
     // Controller
     componentDidMount() {
+        // If there is nothing in Local Storage, call the API
         if (!window.localStorage.length) {
             this.getMenuItems();
         } else {
@@ -37,18 +42,23 @@ class Menu extends React.Component {
         }
     }
 
-    // Lets me generate random prices, in a low, medium, and high price range
+    // Generates random prices: low, medium, and high price range options
     setPrice(x) {
         const priceRange = [5, 10, 15]
         return `$${Math.ceil(Math.random() * 5) + priceRange[x]}`;
     }
 
+    // The API returns 12 random food descriptions. I found that the first two words
+    // make a good title, and from the second word on makes a good menu description
     getText(type, num) {
         if (this.state.menuItems !== 'Generic Food') {
+            // Splits the description into an array of words
             let words = this.state.menuItems[num].description.split(' ');
             if (type === 'title') {
+                // Takes word idx 0 and word idx 1 (capitalizes first letter of word idx 1)
                 return words[0] + ' ' + words[1][0].toUpperCase() + words[1].slice(1);
             }
+            // Else, Capitalizes the first letter of word idx 1, and returns description from word 1 to end
             let startingIdx = words[0].length + 1;
             let text = this.state.menuItems[num].description.slice(startingIdx);
             return text[0].toUpperCase() + text.slice(1);
@@ -60,6 +70,7 @@ class Menu extends React.Component {
     }
 
     render() {
+        // Waits for local storage to load
         if (!window.localStorage.length) {
             return (
                 <div>loading...</div>
