@@ -3,10 +3,6 @@ import Header from './Header.js';
 import Menu from './Menu.js';
 
 class Layout extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         return (
             <React.Fragment>

@@ -3,13 +3,13 @@ import React from 'react';
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.restFirstName = ["Andy's", "Hometown", "Local", "Pretty Decent"]; // ["Andy's", "Amazing", "Awesome", "Alright"]
-        this.restSecondName = ["Yummy Stuff", "Inventions", "Food", "Plates"]; // ["Igloo", "Inventions", "Iterations", "Ideas"]
+        this.restFirstName = ["Robbie's", "Hometown", "Local", "Pretty Decent", "Organic"];
+        this.restSecondName = ["Yummy Stuff", "Inventions", "Food", "Plates", "Experience", "Snacks", "Express"];
     }
 
     randomName() {
-        let x = Math.floor(Math.random() * 4);
-        let y = Math.floor(Math.random() * 4);
+        let x = Math.floor(Math.random() * 5);
+        let y = Math.floor(Math.random() * 7);
         return <h1 className='text-primary'>{this.restFirstName[x]} {this.restSecondName[y]}</h1>;
     }
 
