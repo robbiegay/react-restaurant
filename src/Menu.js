@@ -66,7 +66,7 @@ class Menu extends React.Component {
     }
 
     genItem(num, price) {
-        return <Card mealTitle={this.getText('title', num)} mealDescription={this.getText('des', num)} mealPrice={this.setPrice(price)} />
+        return <Card mealTitle={this.getText('title', num)} mealPrice={this.setPrice(price)} mealDescription={this.getText('des', num)} />
     }
 
     render() {
