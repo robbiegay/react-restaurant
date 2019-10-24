@@ -3,8 +3,8 @@ import React from 'react';
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.restFirstName = ["Robbie's", "Hometown", "Local", "Pretty Decent", "Organic"];
-        this.restSecondName = ["Yummy Stuff", "Inventions", "Food", "Plates", "Experience", "Snacks", "Express"];
+        this.restFirstName = ["Robbie's", 'Hometown', 'Local', 'Pretty Decent', 'Organic'];
+        this.restSecondName = ['Yummy Stuff', 'Inventions', 'Food', 'Plates', 'Experience', 'Snacks', 'Express'];
     }
 
     // Generates a random restaurant name
