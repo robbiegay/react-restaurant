@@ -77,7 +77,7 @@ class Menu extends React.Component {
             )
         } else {
             return (
-                <React.Fragment >
+                <>
                     <ul className='nav nav-pills nav-justified mb-3' id='pills-tab' role='tablist'>
                         <li className='nav-item'>
                             <a className='nav-link active' id='apps-tab' data-toggle='pill' href='#pills-apps' role='tab' aria-controls='pills-apps' aria-selected='true'>Appetizers</a>
@@ -131,7 +131,7 @@ class Menu extends React.Component {
                             {this.genItem(23, 2)}
                         </div>
                     </div>
-                </React.Fragment >
+                </>
             );
         }
     }
