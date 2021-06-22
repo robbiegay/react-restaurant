@@ -24,11 +24,11 @@ class Header extends React.Component {
 
     render() {
         return (
-            <React.Fragment>
+            <>
                 {this.randomName()}
                 <h2 className='text-secondary'>348 E. Main St., Lexington, KY</h2>
                 {this.randomHours()}
-            </React.Fragment>
+            </>
         );
     }
 }

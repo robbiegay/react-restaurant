@@ -25,7 +25,12 @@ class Menu extends React.Component {
                     // then, while the second fetch was running, the menu was already starting to build
                     if (menuArr.length === 24) {
                         localStorage.setItem('menu', JSON.stringify(menuArr));
-                        that.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+                        
+                        try {
+                            that.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+                        } catch (e) {
+                            console.log(`Error parsing JSON: ${e}`);
+                        }
                     }
                 });
             });
@@ -38,7 +43,11 @@ class Menu extends React.Component {
         if (!window.localStorage.length) {
             this.getMenuItems();
         } else {
-            this.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+            try {
+                this.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+            } catch (e) {
+                console.log(`Error parsing JSON: ${e}`);
+            }
         }
     }
 
@@ -77,7 +86,7 @@ class Menu extends React.Component {
             )
         } else {
             return (
-                <React.Fragment >
+                <>
                     <ul className='nav nav-pills nav-justified mb-3' id='pills-tab' role='tablist'>
                         <li className='nav-item'>
                             <a className='nav-link active' id='apps-tab' data-toggle='pill' href='#pills-apps' role='tab' aria-controls='pills-apps' aria-selected='true'>Appetizers</a>
@@ -131,7 +140,7 @@ class Menu extends React.Component {
                             {this.genItem(23, 2)}
                         </div>
                     </div>
-                </React.Fragment >
+                </>
             );
         }
     }

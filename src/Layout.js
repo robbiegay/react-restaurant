@@ -7,7 +7,7 @@ import Menu from './Menu.js';
 class Layout extends React.Component {
     render() {
         return (
-            <React.Fragment>
+            <>
                 <div className='container-fluid'>
                     <div className='row'>
                         <div className='col-0 col-sm-0 col-md-1 col-lg-2' />
@@ -19,7 +19,7 @@ class Layout extends React.Component {
 
                     </div>
                 </div>
-            </React.Fragment>
+            </>
         );
     }
 }
