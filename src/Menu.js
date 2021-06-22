@@ -25,7 +25,12 @@ class Menu extends React.Component {
                     // then, while the second fetch was running, the menu was already starting to build
                     if (menuArr.length === 24) {
                         localStorage.setItem('menu', JSON.stringify(menuArr));
-                        that.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+                        
+                        try {
+                            that.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+                        } catch (e) {
+                            console.log(`Error parsing JSON: ${e}`);
+                        }
                     }
                 });
             });
@@ -38,7 +43,11 @@ class Menu extends React.Component {
         if (!window.localStorage.length) {
             this.getMenuItems();
         } else {
-            this.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+            try {
+                this.setState({ menuItems: JSON.parse(window.localStorage.menu) });
+            } catch (e) {
+                console.log(`Error parsing JSON: ${e}`);
+            }
         }
     }
 
